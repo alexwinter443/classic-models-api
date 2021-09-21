@@ -4,12 +4,14 @@ const mySqlConnect = require("../connection/mysql_connect");
 exports.getProductLines = (req, callback) => {
   let error = false;
   mySqlConnect.acquire((error, connection) => {
+    // failed to acquire connection from pool
     if (error) {
       callback(error, null);
     } else {
       connection.query(
         "SELECT productLine from productlines",
         (error, data) => {
+          // put the connection back in the pool
           connection.release();
           callback(error, data);
         }
@@ -41,6 +43,7 @@ exports.createProductLine = (data, callback) => {
     if (error) {
       callback(error, null);
     } else {
+      // The ?? operator puts the id in backtics so the MySQL server won't see the values as Strings
       let insertQuery = connection.format(
         'INSERT INTO productlines (??, ??) VALUES (?, ?)',
         [
@@ -49,6 +52,9 @@ exports.createProductLine = (data, callback) => {
           data.productLine,
           data.textDescription
         ]);
+
+      // This will give you a query that's ready to run in Workbench
+      // Good for debugging  
       console.log(insertQuery);
       connection.query(insertQuery, (error, data) => {
         connection.release();
