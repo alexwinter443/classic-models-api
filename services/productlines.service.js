@@ -8,8 +8,8 @@ exports.getProductLines = (req, callback) => {
     if (error) {
       callback(error, null);
     } else {
-      connection.query(
-        "SELECT productLine from productlines",
+      connection.query(        
+        "SELECT productLine from productlines",  // only interested in the key to productlines
         (error, data) => {
           // put the connection back in the pool
           connection.release();
@@ -28,7 +28,7 @@ exports.getProductLine = (req, callback) => {
       connection.query(connection.format(
         'SELECT * FROM productlines WHERE productLine = ?',
         [
-          req.params.id,
+          req.params.id,  // parameters matched by position to the question marks
         ]
       ), (error, data) => {
         connection.release();

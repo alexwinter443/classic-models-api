@@ -3,6 +3,7 @@ const mySqlConnect = require("./connection/mysql_connect");
 const app = express();
 const productlinesRoutes = require("./routes/productlines.route");
 
+// Initialize the MySQl connection pool
 mySqlConnect.init();
 
 // prepare to parse request body

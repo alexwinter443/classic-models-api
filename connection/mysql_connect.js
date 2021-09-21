@@ -1,9 +1,12 @@
 const mysql = require('mysql');  
 const dbConfig = require('../config/db.config');
 
-  
+// A function constructor
+// -- starts with a capital letter
+// constructors : initialize objects
 function MySQLConnect() {  
-  
+  // Creates an object with two methods: init and acquire
+  // and one data member: pool
   this.pool = null;  
     
   // Init MySql Connection Pool  

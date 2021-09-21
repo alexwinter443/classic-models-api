@@ -5,6 +5,8 @@ var express = require("express");
 
 var router = express.Router();
 
+// Register multiple productlines routes with the router
+// Each call must return the router object so we can chain calls.
 router
   .get(productLinesUri, productlinesController.getProductLines)
   .get(productLineUri, productlinesController.getProductLine)

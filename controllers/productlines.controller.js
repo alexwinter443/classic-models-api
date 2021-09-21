@@ -2,6 +2,7 @@ const productLines = require("../services/productlines.service");
 
 exports.getProductLines = (req, res, next) => {
   // Validation area
+  // Calling getProductLines with the req and the callback function
   productLines.getProductLines(req, (error, results) => {
     if (error) {
       return res.status(400).send({ success: 0, data: "Bad request" });
